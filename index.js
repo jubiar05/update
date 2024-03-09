@@ -93,7 +93,8 @@ async function share(cookies, url, amount, interval) {
       const response = await axios.post(`https://graph.facebook.com/me/feed?link=https://m.facebook.com/${id}&published=0&access_token=${accessToken}`, {}, {
         headers
       });
-      if (response.status === 200) {
+      if (response.status !== 200) {
+      } else {
         total.set(postId, {
           ...total.get(postId),
           count: total.get(postId).count + 1,
@@ -174,4 +175,4 @@ async function convertCookie(cookie) {
       reject("Error processing appstate please provide a valid appstate");
     }
   });
-}
+      }
